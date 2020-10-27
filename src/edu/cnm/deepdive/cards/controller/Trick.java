@@ -43,18 +43,13 @@ public class Trick {
   }
 
   public void summarize() {
-    int redCount = 0;
-    for (Card card : redInfluenced) {
-      if (card.getSuit().getColor()== Color.RED) {
+    long redCount = redInfluenced.stream()
+        .filter((card) -> card.getSuit().getColor() == Color.RED)
+        .count();
+    long blackCount = blackInfluenced.stream()
+        .filter((card) -> card.getSuit().getColor() == Color.BLACK)
+        .count();
         redCount++;
-      }
-    }
-    int blackCount = 0;
-    for (Card card : blackInfluenced) {
-      if (card.getSuit().getColor()== Color.BLACK) {
-        blackCount++;
-      }
-    }
     redInfluenced.sort();
     blackInfluenced.sort();
     System.out.printf(SUMMARY_FORMAT, "Red", redInfluenced, redCount);
